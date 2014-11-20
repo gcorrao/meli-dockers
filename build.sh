@@ -1,5 +1,6 @@
 #!/bin/bash
 USER=$1
+test -z $USER && echo "Error: you must insert a user parameter" && exit 1
 VERSION=$(cat version)
 IMAGES=( "melibuntu" "melibuntujdk" "tomcat-runtime" "grails" )
 
@@ -32,3 +33,9 @@ for IMAGE in "${IMAGES[@]}" ; do
 	echo " "
 	cd ..
 done
+
+cd grails/onbuild
+sudo docker build -t  $USER/grails:onbuild .
+sudo docker push $USER/grails:onbuild
+cd ../../
+
