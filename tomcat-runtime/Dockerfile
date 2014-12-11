@@ -1,6 +1,7 @@
 FROM mlarq/melibuntujdk:latest
 
 RUN curl -SL "https://s3-us-west-2.amazonaws.com/dario-deploys2/apache-tomcat-7.0.57.tar.gz" | tar xz -C /apps
+RUN curl -SL "https://s3-us-west-2.amazonaws.com/dario-deploys2/newrelic-java-3.12.0.zip" | tar xz -C /apps
 
 ENV CATALINA_HOME /apps/apache-tomcat-7.0.57
 

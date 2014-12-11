@@ -7,4 +7,4 @@ ONBUILD WORKDIR /dummy_app
 ONBUILD RUN grails refresh-dependencies && mkdir /output
 ONBUILD COPY ./ /sources
 ONBUILD WORKDIR /sources
-ONBUILD CMD grails war && mv /sources/target/*.war /output
+ONBUILD CMD grails war --non-interactive ROOT.war && cp /sources/target/ROOT.war /output
