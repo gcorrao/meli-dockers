@@ -2,9 +2,7 @@
 FROM mlarq/grails:latest
 MAINTAINER Simonassi Luis Dario version: 0.1
 
-ONBUILD COPY ./grails-app/conf/BuildConfig.groovy /dummy_app/grails-app/conf/BuildConfig.groovy 
-ONBUILD WORKDIR /dummy_app
-ONBUILD RUN grails refresh-dependencies && mkdir /output
+ONBUILD RUN mkdir -p /output
 ONBUILD COPY ./ /sources
 ONBUILD WORKDIR /sources
-ONBUILD CMD grails war --non-interactive ROOT.war && cp /sources/target/ROOT.war /output
+ONBUILD CMD grails war --non-interactive /output/ROOT.war
