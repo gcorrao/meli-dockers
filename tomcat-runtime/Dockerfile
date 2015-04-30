@@ -5,7 +5,7 @@ RUN curl --silent --location --show-error --verbose "https://s3-us-west-2.amazon
 
 ENV CATALINA_HOME /apps/apache-tomcat-7.0.57
 
-ENV JAVA_OPTS "$JAVA_OPTS -javaagent:/apps/newrelic/newrelic.jar"
+ENV JAVA_OPTS "$JAVA_OPTS -javaagent:/apps/newrelic/newrelic.jar -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=7199 -Dcom.sun.management.jmxremote.local.only=true -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
 
 EXPOSE 8080
 
