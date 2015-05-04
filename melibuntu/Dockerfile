@@ -1,6 +1,8 @@
-FROM ubuntu:14.04
-MAINTAINER Simonassi Luis Dario
+FROM ubuntu:15.04
 
-RUN apt-get update && apt-get install -y curl wget
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install -y --no-install-recommends curl wget
+RUN apt-get install -y --no-install-recommends unzip software-properties-common
 
 CMD ["/bin/bash"]

@@ -1,9 +1,14 @@
 FROM mlarq/melibuntu:latest
 
-RUN mkdir -p /apps && \
-    curl -SL https://s3-us-west-2.amazonaws.com/dario-deploys2/jdk.tar.gz | tar xz -C /apps
+RUN \
+  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+  add-apt-repository -y ppa:webupd8team/java && \
+  apt-get update && \
+  apt-get install -y oracle-java8-installer && \
+  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /var/cache/oracle-jdk8-installer
 
-ENV JAVA_HOME /apps/jdk
+ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 ENV PATH $PATH:$JAVA_HOME/bin
 
 CMD ["/bin/bash"]

@@ -2,7 +2,8 @@
 FROM mlarq/melibuntujdk:latest
 
 #Install grails
-RUN apt-get --yes --force-yes install unzip && curl --silent --location --show-error --verbose "http://dist.springframework.org.s3.amazonaws.com/release/GRAILS/grails-2.4.4.zip" >/tmp/grails.zip && unzip /tmp/grails.zip -d /apps && mv /apps/grails-2.4.4/ /apps/grails
+RUN mkdir /apps
+RUN wget "https://github.com/grails/grails-core/releases/download/v2.4.5/grails-2.4.5.zip" -O /tmp/grails.zip && unzip /tmp/grails.zip -d /apps && mv /apps/grails-* /apps/grails
 ENV GRAILS_HOME /apps/grails
 ENV PATH $PATH:$GRAILS_HOME/bin
 
