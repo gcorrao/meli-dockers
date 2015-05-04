@@ -6,7 +6,8 @@ RUN wget "http://mirrors.nxnethosting.com/apache/tomcat/tomcat-8/v8.0.21/bin/apa
   cd /apps && \
   tar zxf /tmp/apache-tomcat.tar.gz && \
   rm /tmp/apache-tomcat.tar.gz && \
-  mv /apps/apache-tomcat* /apps/tomcat
+  mv /apps/apache-tomcat* /apps/tomcat && \
+  rm -fr /apps/tomcat/webapps/ROOT
 
 RUN apt-get update -y && apt-get install -y --no-install-recommends libtcnative-1
 
