@@ -1,10 +1,5 @@
 FROM datadog/docker-dd-agent
 
-ADD conf.d/jmx.yaml /etc/dd-agent/conf.d/jmx.yaml
-ADD conf.d/tomcat.yaml /etc/dd-agent/conf.d/tomcat.yaml
-
-ENV JAVA_VERSION 1.8.0
-
 RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" \
       | tee /etc/apt/sources.list.d/webupd8team-java.list \
     &&  echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" \
@@ -20,8 +15,10 @@ RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
+COPY conf.d/jmx.yaml /etc/dd-agent/conf.d/jmx.yaml
+COPY conf.d/tomcat.yaml /etc/dd-agent/conf.d/tomcat.yaml
+COPY supervisor.conf /etc/dd-agent/supervisor.conf
 RUN sed -i -e "s/^# statsd_forward_host:.*$/statsd_forward_host: datadog/" /etc/dd-agent/datadog.conf \
     && sed -i -e "s/^# statsd_forward_port:.*$/statsd_forward_port: 8125/" /etc/dd-agent/datadog.conf
-COPY supervisor.conf /etc/dd-agent/supervisor.conf
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
