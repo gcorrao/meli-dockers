@@ -1,0 +1,6 @@
+init_config:
+
+instances:
+  - host: application
+    port: 7199
+    name: jmx_instance
