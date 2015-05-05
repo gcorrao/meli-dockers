@@ -8,7 +8,7 @@ RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" \
     && echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" \
         | /usr/bin/debconf-set-selections \
     && apt-get update \
-    && apt-get install -y \
+    && apt-get install -y --no-install-recommends \
         python-software-properties \
         oracle-java8-installer \
     && update-alternatives --display java \
