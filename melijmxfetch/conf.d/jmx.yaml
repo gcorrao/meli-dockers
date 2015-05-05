@@ -1,5 +1,5 @@
 init_config:
-
+  java_options: " -Xmx100m  -Xms50m"
 instances:
   - host: application
     port: 7199
