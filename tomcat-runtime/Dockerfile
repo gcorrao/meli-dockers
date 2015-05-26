@@ -16,6 +16,8 @@ RUN wget "https://s3.amazonaws.com/newrelic-jars/newrelic-java-3.15.0.zip" -O /t
   unzip /tmp/newrelic-java-3.15.0.zip -d /apps && \
   rm /tmp/newrelic-java-3.15.0.zip
 
+RUN sed -i -e 's/connectionTimeout="20000"/connectionTimeout="20000" keepAliveTimeout="60000" maxKeepAliveRequests="-1"/' /apps/tomcat/conf/server.xml
+
 ENV CATALINA_HOME /apps/tomcat
 
 ENV JAVA_OPTS "$JAVA_OPTS -javaagent:/apps/newrelic/newrelic.jar -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=7199 -Dcom.sun.management.jmxremote.local.only=true -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
