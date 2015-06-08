@@ -14,4 +14,6 @@ COPY rsyslog.d/* /etc/rsyslog.d/
 
 ENTRYPOINT ["/entrypoint.sh"]
 
+EXPOSE 514/udp
+
 CMD ["rsyslogd", "-n"]

@@ -22,4 +22,6 @@ else
   exit 1
 fi
 
+sed -i -e "s/##HOST##/$(hostname)/" "/etc/rsyslog.d/10-docker.conf"
+
 exec "$@"
