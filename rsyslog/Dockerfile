@@ -7,13 +7,11 @@ RUN apt-get update
 RUN apt-get -y --no-install-recommends install rsyslog
 RUN rm -fr /etc/rsyslog.d/*
 
-COPY entrypoint.sh /entrypoint.sh
-
-COPY rsyslog.conf /etc/
-COPY rsyslog.d/* /etc/rsyslog.d/
-
-ENTRYPOINT ["/entrypoint.sh"]
-
 EXPOSE 514/udp
 
+ADD entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
 CMD ["rsyslogd", "-n"]
+
+COPY rsyslog.conf /etc/
